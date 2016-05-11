@@ -1,0 +1,35 @@
+{
+  "name": "gif-meme-my-image",
+  "version": "1.0.0",
+  "description": "web-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape tests/**/*.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/broc-harcourt/gif-meme-my-image.git"
+  },
+  "keywords": [
+    "gif",
+    "meme",
+    "image",
+    "hashtag"
+  ],
+  "author": "Pearl, Lauren, Nick, Jenny, and Broc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/broc-harcourt/gif-meme-my-image/issues"
+  },
+  "homepage": "https://github.com/broc-harcourt/gif-meme-my-image#readme",
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "hbs": "^4.0.0",
+    "knex": "^0.11.1",
+    "nodemon": "^1.9.2"
+  }
+}
