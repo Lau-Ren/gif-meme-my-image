@@ -22,6 +22,15 @@ module.exports = function (knex) {
         .then(function(resp) {callback(null, resp)})
     },
 
-    getAllTagsFromImg
+    getAllTagsForImg: function(url, callback) {
+      knex('tags')
+        .join('image_tags', 'images.id', 'image_tags.img_id' )
+        .join('tags', 'tags_id', 'image_tags.tag_id')
+        .select('tags.name')
+        .where({'images.url': url})
+        .then(function(resp) {callback(null, resp)})
+    },
+
+
   }
 }
