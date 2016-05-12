@@ -3,11 +3,13 @@ const db = require('../db')(knex)
 
 var finalResult
 
-db.getAllImagesWithTag('harrypotter')
-  .then(saveAllImgs)
-  .then(getAllTagsForAllImgs)
-  .then(stitchTagsToImages)
-  .then(ourOwnLog)
+module.exports = function (tag) {
+  return db.getAllImagesWithTag(tag)
+    .then(saveAllImgs)
+    .then(getAllTagsForAllImgs)
+    .then(stitchTagsToImages)
+    .then(ourOwnLog)
+}
 
 function saveAllImgs (images) {
   finalResult = images
@@ -31,6 +33,7 @@ function ourOwnLog (finished) {
   finished.forEach(function (image) {
     console.log(image)
   })
+  return finished
 }
 
 // , function (err, images) {
