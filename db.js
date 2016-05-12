@@ -2,34 +2,38 @@ module.exports = function (knex) {
 
   return {
     getAll: function(list, callback) {
-      knex().table(list).then(function(resp) {
-        callback(null, resp)
-      })
+      knex().table(list)
+        .then(function(resp) {callback(null, resp)})
     },
 
-    add: function(table, params, callback) {
-      knex(table).insert(params).then(function(resp) {
-        callback(null, resp)
+    add: function(url, tagsArr, callback) {
+      var tagsObjArr = tagsArr.map(function(tag) {
+        return {'name': tag}
       })
+      knex('tags')
+        .insert(tagsObjArr)
+        .select('images')
+        .insert({'url': url})
+        .then(function(resp) {callback(null, resp)})
     },
 
     getAllImagesWithTag: function(tag, callback) {
       knex('images')
-        .join('image_tags', 'images.id', 'image_tags.img_id' )
-        .join('tags', 'tags_id', 'image_tags.tag_id')
-        .select('images.url')
+        .join('idIndex', 'images.id', 'idIndex.img_id' )
+        .join('tags', 'tags.id', 'idIndex.tag_id')
+        .select('images.id', 'images.descript', 'images.url')
         .where({'tags.name': tag})
         .then(function(resp) {callback(null, resp)})
     },
 
-    getAllTagsForImg: function(url, callback) {
+    getAllTagsForImg: function(image_id, callback) {
       knex('tags')
-        .join('image_tags', 'images.id', 'image_tags.img_id' )
-        .join('tags', 'tags_id', 'image_tags.tag_id')
+        .join('idIndex', 'tags.id', 'idIndex.tag_id' )
         .select('tags.name')
-        .where({'images.url': url})
+        .where({'idIndex.img_id': image_id})
         .then(function(resp) {callback(null, resp)})
     },
+
 
 
   }
