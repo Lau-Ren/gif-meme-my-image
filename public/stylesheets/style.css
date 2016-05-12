@@ -1,0 +1,66 @@
+body {
+  background-color: #283e66;
+  font-family: 'Cabin', Helvetica, Arial, sans-serif;
+  font-size: 3em;
+  line-height: 4em;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  color: #ffc11a;
+}
+
+header h1 {
+  font-family: 'Lobster', Georgia, Times, serif;
+  font-size: 4rem;
+  line-height: 5rem;
+  margin: 1rem;
+}
+
+header h5 {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+}
+
+main {
+
+}
+
+.image-container-all {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2%;
+}
+
+.image-container-small {
+  width: 260px;
+  height: 320px;
+  margin: 5px;
+}
+
+.image-container-small img {
+  width: 250px;
+  height: 250px;
+  margin: 5px;
+}
+
+.small-single {
+
+}
+
+.large-single {
+
+
+}
+
+
+
+
+
+
+
