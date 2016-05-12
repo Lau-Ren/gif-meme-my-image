@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 
 const routes = require('./routes/index')
-const defaultArgs = require('./routes/default-route-arguments')
 
 const app = express()
 
@@ -22,10 +21,10 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
   res.status(err.status || 500)
-  var args = defaultArgs()
-  args.message = err.message
-  args.error = err
-  res.render('error', args)
+  res.render('error', {
+    message: err.message,
+    error: err
+  })
 })
 
 module.exports = app

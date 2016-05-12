@@ -1,0 +1,13 @@
+<div class="image-container-all">
+  {{#each images}}
+    <div class="image-container-single small-single">
+      <a href="/image-single/?images.id={{this.id}}"><img src="{{this.url}}"></a>
+      <p>
+        {{this.description}}
+        {{#each this.tags}}
+          <a href="/images/?tags.name={{this.name}}"> #{{this.name}}</a>
+        {{/each}}
+      </p>
+    </div>
+  {{/each}}
+</div>
