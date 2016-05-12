@@ -43,6 +43,26 @@ module.exports = function (knex) {
         .where({'idIndex.img_id': image_id})
     },
 
+    saveImagesAndDescriptsToDB: function (tagStr, urlStr, descriptStr){
+        var arrObjs = [{url:urlStr},{descript:descriptStr}]
+        return knex('images')
+        // insert into images table
+        .insert(arrObjs)
+        .select('id', 'url', 'descript').from('images')
+        .then(console.log)
+
+            // .select('id', 'name').from('tags')
+            // .then(function (arrOfTagsRowObjs){
+            //     arrOfTagsRowObjs.forEach(function(item){
+            //         if (item.name === tagStr){
+            //             knex('').insert({})
+            //         }
+            //     })
+            // })
+    },
+
+
+
     // getAllTagsForImg: function(image_id, callback) {
     //   knex('tags')
     //     .join('idIndex', 'tags.id', 'idIndex.tag_id')
