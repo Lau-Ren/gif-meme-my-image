@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTableIfNotExists('tags', function(table){
     table.increments('')
     table.string('name')
-
   })
 };
 

@@ -31,6 +31,7 @@ exports.seed = function(knex, Promise) {
     knex('tags').insert({id: 24, name: 'affairs'}),
     knex('tags').insert({id: 25, name: 'fancy'}),
     knex('tags').insert({id: 26, name: 'monocle'}),
-    knex('tags').insert({id: 27, name: 'tophat'}),
+    knex('tags').insert({id: 27, name: 'tophat'})
+
   );
 };
