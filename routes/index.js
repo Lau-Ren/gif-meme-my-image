@@ -1,13 +1,21 @@
 const express = require('express')
 const router = express.Router()
+const dbTest = require('../tests/db-test')
 
 router.get('/', function (req, res, next) {
   res.render('index', {})
 })
 
 router.get('/images', function (req, res, next) {
-  res.render('images', args)
-  console.log(req.query)
+  var tag = 'cat'
+  if (req.query.hasOwnProperty('tagname')) {
+    tag = req.query.tagname
+  }
+  dbTest(tag)
+    .then(function (images) {
+      res.render('images', { "images": images })
+    })
+
 })
 
 router.get('/image-single', function (req, res, next) {
