@@ -4,7 +4,7 @@
   "description": "web-app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon start.js",
     "test": "tape tests/**/*.js | tap-spec"
   },
   "repository": {
