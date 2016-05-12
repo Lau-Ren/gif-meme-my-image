@@ -28,13 +28,21 @@ module.exports = function (knex) {
 
     getAllTagsForImg: function(image_id, callback) {
       knex('tags')
-        .join('idIndex', 'tags.id', 'idIndex.tag_id' )
+        .join('idIndex', 'tags.id', 'idIndex.tag_id')
         .select('tags.name')
         .where({'idIndex.img_id': image_id})
         .then(function(resp) {callback(null, resp)})
     },
 
-
+    //For future use when user table is implemented
+    // getUsersImages: function(user_id, calback) {
+    //   knex('images')
+    //     .join('idIndex', 'images.id', 'idIndex.img_id')
+    //     .join('users', 'users.id', 'idIndex.user_id')
+    //     .select('images.id', 'images.descript', 'images.url')
+    //     .where({'users.id': user_id})
+    // }
 
   }
 }
+
