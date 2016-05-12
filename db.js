@@ -6,14 +6,16 @@ module.exports = function (knex) {
         .then(function(resp) {callback(null, resp)})
     },
 
-    add: function(url, tagsArr, callback) {
+    add: function(/*user_id*/, url, tagsArr, callback) {
       var tagsObjArr = tagsArr.map(function(tag) {
         return {'name': tag}
       })
       knex('tags')
         .insert(tagsObjArr)
-        .select('images')
-        .insert({'url': url})
+        .then(knex('images')
+          .insert({'url': url}))
+        // .then(knex('users')
+        //   .insert({'id': user_id}))
         .then(function(resp) {callback(null, resp)})
     },
 
