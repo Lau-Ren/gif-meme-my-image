@@ -1,17 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const dbTest = require('../tests/db-test')
+const dbCall = require('../lib/dbfunc')
+
 
 router.get('/', function (req, res, next) {
-  res.render('index', {})
+  dbCall.getAllImgs()
+    .then(function (images) {
+      res.render('index', {"images": images})
+    })
 })
 
 router.get('/images', function (req, res, next) {
-  var tag = 'cat'
+  var tag
   if (req.query.hasOwnProperty('tagname')) {
     tag = req.query.tagname
+  } else {
+    res.redirect('/')
   }
-  dbTest(tag)
+  dbCall.selectByHashtag(tag)
     .then(function (images) {
       res.render('images', { "images": images })
     })
@@ -19,28 +25,15 @@ router.get('/images', function (req, res, next) {
 })
 
 router.get('/image-single', function (req, res, next) {
-  res.render('image-single', args.images[0])
-  console.log(req.query)
-})
+  dbCall.getAllTagsForImg(req.query.id)
+    .then(function(tags) {
+      req.query.tags = tags
+      res.render('image-single', req.query)
+    })
+  })
 
 module.exports = router
 
-var args = {
-  images: [
-    {
-      id: 1,
-      url: "http://www.kurgoblog.com/wp-content/uploads/2014/01/Dogsnow.jpg",
-      description: 'Dog playing fetch in the powder.',
-      tags: [{name: 'dog'}, {name: 'frisbee'}, {name: 'snow'}]
-    },
-    {
-      id: 2,
-      url: "http://media.treehugger.com/assets/images/2012/07/20120716-snow-leopard.jpg.662x0_q70_crop-scale.jpg",
-      description: 'Snow leopard with a huge tail',
-      tags: [{name: 'snow'}, {name: 'leopard'}, {name: 'tail'}, {name: 'cat'}]
-    }
-  ]
-}
 
 
 

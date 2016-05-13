@@ -9,12 +9,17 @@ header, footer {
   color: #ffc11a;
 }
 
+header a {
+  text-decoration: none;
+  color: #ffc11a;
+}
+
 header h1 {
   font-family: 'Lobster', Georgia, Times, serif;
-  font-size: 4rem;
+  font-size: 4.5rem;
   line-height: 5rem;
   margin: 1rem;
-  margin: 20px 0 100px 0;
+  margin: 50px 0 70px 0;
 }
 
 footer h5 {
@@ -28,18 +33,31 @@ main {
 
 }
 
-.image-container-all {
-  display: -webkit-flex;
+.masonry {
+  column-count: 4;
+  column-gap: 1em;
+  /*display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
-  margin-bottom: 2%;
+  margin-bottom: 2%;*/
 }
 
-.image-container-single {
+.item {
+  background-color: #eee;
+  display: inline-block;
+  margin: 00 1em;
+  margin-top: 2em;
+}
+
+.item img {
+  width: 100%;
+}
+
+/*.image-container-single {
 }
 
 .image-container-single img {
@@ -56,7 +74,7 @@ main {
   height: 250px;
   margin: 5px;
 }
-
+*/
 .large-single {
   display: flex;
   flex-direction: column;
@@ -67,13 +85,46 @@ main {
   font-size: 16pt;
 }
 
-.small-single p {
+.item p {
   font-size: 14pt;
+  padding-left: 20px;
 }
 
 a {
   color: black;
 }
+
+@media only screen and (min-width: 400px) {
+    .masonry {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .masonry {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .masonry {
+        -moz-column-count: 4;
+        -webkit-column-count: 4;
+        column-count: 4;
+    }
+}
+
+/*@media only screen and (min-width: 1100px) {
+    .masonry {
+        -moz-column-count: 5;
+        -webkit-column-count: 5;
+        column-count: 5;
+    }
+}*/
 
 
 

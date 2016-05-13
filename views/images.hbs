@@ -1,9 +1,9 @@
-<div class="image-container-all">
+<div class="masonry">
   {{#each images}}
-    <div class="image-container-single small-single">
-      <a href="/image-single/?images.id={{this.id}}"><img src="{{this.url}}"></a>
+    <div class="item">
+      <a href="/image-single/?id={{this.id}}&url={{this.url}}&descript={{this.descript}}"><img src="{{this.url}}"></a>
       <p>
-        Description here{{this.description}}
+        {{this.descript}}
         {{#each this.tags}}
           <a href="/images/?tagname={{this.name}}"> #{{this.name}}</a>
         {{/each}}

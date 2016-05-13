@@ -1,9 +1,8 @@
 module.exports = function (knex) {
 
   return {
-    getAll: function(table, callback) {
-      knex(table)
-        .then(function(resp) {callback(null, resp)})
+    getAll: function() {
+      return knex.select().table('images')
     },
 
     // add: function(/*user_id*/, url, tagsArr, callback) {
