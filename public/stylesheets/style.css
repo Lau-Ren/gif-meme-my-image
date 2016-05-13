@@ -9,6 +9,10 @@ header, footer {
   color: #ffc11a;
 }
 
+footer a {
+  color: #ffc11a
+}
+
 header a {
   text-decoration: none;
   color: #ffc11a;
