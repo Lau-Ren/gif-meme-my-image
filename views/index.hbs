@@ -1,3 +1,13 @@
-<p>
-  Main stuff here.
-</p>
+<div class="masonry">
+  {{#each images}}
+    <div class="item">
+      <a href="/image-single/?id={{this.id}}&url={{this.url}}&descript={{this.descript}}"><img src="{{this.url}}"></a>
+      <p>
+        {{this.descript}}
+        {{#each this.tags}}
+          <a href="/images/?tagname={{this.name}}"> #{{this.name}}</a>
+        {{/each}}
+      </p>
+    </div>
+  {{/each}}
+</div>
