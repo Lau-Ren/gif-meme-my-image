@@ -1,6 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const dbTest = require('../tests/db-test')
+const bodyParser = require('body-parser')
+
+
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+
 
 router.get('/', function (req, res, next) {
   res.render('index', {})
@@ -20,8 +27,26 @@ router.get('/images', function (req, res, next) {
 
 router.get('/image-single', function (req, res, next) {
   res.render('image-single', args.images[0])
-  console.log(req.query)
+  // console.log(req.query)
 })
+
+router.get('/image-add', function (req, res, next) {
+  res.render("submit", {})
+
+})
+
+router.post('/image-add', function(req, res, next) {
+  console.log(req.body)
+
+})
+
+
+
+
+
+
+
+
 
 module.exports = router
 
