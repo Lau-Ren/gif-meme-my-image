@@ -1,14 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const dbTest = require('../tests/db-test')
-const bodyParser = require('body-parser')
 const dbCall = require('../lib/dbfunc')
-
+const bodyParser = require('body-parser')
 
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-
 
 router.get('/', function (req, res, next) {
   dbCall.getAllImgs()
@@ -32,10 +28,13 @@ router.get('/images', function (req, res, next) {
 })
 
 router.get('/image-single', function (req, res, next) {
-<<<<<<< HEAD
-  res.render('image-single', args.images[0])
-  // console.log(req.query)
-})
+  dbCall.getAllTagsForImg(req.query.id)
+    .then(function(tags) {
+      req.query.tags = tags
+      res.render('image-single', req.query)
+    })
+  })
+
 
 router.get('/image-add', function (req, res, next) {
   res.render("submit", {})
@@ -46,29 +45,6 @@ router.post('/image-add', function(req, res, next) {
   console.log(req.body)
 
 })
-=======
-  dbCall.getAllTagsForImg(req.query.id)
-    .then(function(tags) {
-      req.query.tags = tags
-      res.render('image-single', req.query)
-    })
-  })
->>>>>>> c3633829b34852525041a319472bcf3664c5ebc1
-
-
-
-
-
-
-
 
 
 module.exports = router
-
-
-
-
-
-
-
-
