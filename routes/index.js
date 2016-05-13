@@ -3,6 +3,7 @@ const router = express.Router()
 const dbCall = require('../lib/dbfunc')
 const bodyParser = require('body-parser')
 
+
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
@@ -42,7 +43,11 @@ router.get('/image-add', function (req, res, next) {
 })
 
 router.post('/image-add', function(req, res, next) {
-  console.log(req.body)
+  dbCall.saveImage(req.body.hashTag, req.body.url, req.body.description)
+    .then(function() {
+      res.redirect('/')
+    })
+  // console.log(req.body)
 
 })
 
