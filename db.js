@@ -43,23 +43,58 @@ module.exports = function (knex) {
         .where({'idIndex.img_id': image_id})
     },
 
-    saveImagesAndDescriptsToDB: function (tagStr, urlStr, descriptStr){
-        var arrObjs = [{url:urlStr},{descript:descriptStr}]
-        return knex('images')
-        // insert into images table
-        .insert(arrObjs)
-        .select('id', 'url', 'descript').from('images')
-        .then(console.log)
+    saveImageToImagesTable: function (tagStr, urlStr, descriptStr){
 
-            // .select('id', 'name').from('tags')
-            // .then(function (arrOfTagsRowObjs){
-            //     arrOfTagsRowObjs.forEach(function(item){
-            //         if (item.name === tagStr){
-            //             knex('').insert({})
-            //         }
-            //     })
-            // })
+        var currImgId
+        var currentTagId
+
+        return knex('images')
+        .insert({url:urlStr, descript:descriptStr})
+        .into('images')
+        .select('id', 'url', 'descript').from('images')
+        .then(function (id) {
+         // console.log('we are assigning id to know variable')
+            currImgId = id[0]
+            return currImgId
+        })
+        .then (function (currImgId) {
+            knex('tags').select('id', 'name')
+            .then(function (arrOfTagsRowObjs){
+                return arrOfTagsRowObjs.filter(function(obj){
+                    return (obj.name === tagStr)
+                })
+            })
+            .then(function(arr){
+
+                if(arr.length > 0){
+                    currentTagId = arr[0].id
+                    return currentTagId
+                } else {
+                    return knex('tags')
+                        .insert({name: tagStr})
+                        .into('tags')
+                        .select('id')
+                        .from('tags')
+                        .where('name', tagStr)
+                        .then(function(id){
+                            currentTagId = id[0]
+                        })
+                }
+            })
+            .then(function(){
+                console.log('so we have imgid:', currImgId, 'and tagid:', currentTagId)
+                return knex('idIndex')
+                    .insert({img_id: currImgId, tag_id:currentTagId })
+                    .into('idIndex')
+            })
+        })
+
+
+
     },
+
+
+
 
 
 
