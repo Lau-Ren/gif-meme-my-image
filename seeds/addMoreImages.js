@@ -28,6 +28,6 @@ exports.seed = function(knex, Promise) {
     knex('idIndex').insert({img_id: '18', tag_id: '29'}),
 
     knex('tags').insert({name: 'sherlock'}),
-    knex('tags').insert({name: 'metameme'}),
+    knex('tags').insert({name: 'metameme'})
   );
 };
